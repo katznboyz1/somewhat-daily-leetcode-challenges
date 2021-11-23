@@ -54,9 +54,24 @@ int greatestCommonFactor(int num1, int num2) {
     return maxgcf;
 }
 
+void printAllRelationships(vector<int> numsPointers[], const int NUMS_SIZE) {
+
+    for (int i = 0; i < NUMS_SIZE; i++) {
+
+        std::cout << "Index " << std::to_string(i) << " has " << std::to_string(numsPointers[i].size()) << " relationships: ";
+
+        for (int j = 0; j < numsPointers[i].size(); j++) {
+
+            std::cout << std::to_string(numsPointers[i][j]) << ", ";
+        }
+
+        std::cout << endl;
+    }
+}
+
 int main() {
 
-    const int NUMS_SIZE = 500; //2 * pow(10, 4);
+    const int NUMS_SIZE = 20; //2 * pow(10, 4);
     const vector<int> NUMS_ORIGINAL = generateNums(NUMS_SIZE);
 
     vector<int>* numsPointers = new vector<int>[NUMS_SIZE];
@@ -75,7 +90,30 @@ int main() {
         }
     }
 
+    int maxPointerConnections = 0;
+
     // find the size of the node connections
+    for (int i = 0; i < NUMS_SIZE; i++) {
+
+        numsPointersConnections[i] = 0;
+
+        for (int j = 0; j < NUMS_SIZE; j++) {
+
+            for (int k = 0; k < numsPointers[j].size(); k++) {
+
+                if (numsPointers[j][k] == i) {
+
+                    numsPointersConnections[i]++;
+
+                    if (numsPointersConnections[i] > maxPointerConnections) maxPointerConnections = numsPointersConnections[i];
+                }
+            }
+        }
+    }
+
+    printAllRelationships(numsPointers, NUMS_SIZE);
+
+    std::cout << std::to_string(maxPointerConnections) << endl;
 
     return 0;
 }
