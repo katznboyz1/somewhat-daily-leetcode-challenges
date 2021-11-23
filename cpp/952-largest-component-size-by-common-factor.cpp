@@ -34,6 +34,7 @@ int greatestCommonFactor(int num1, int num2) {
 
     int max;
     int min;
+
     if (num1 > num2) {max = num1; min = num2;} else {max = num2; min = num1;}
 
     int maxgcf;
@@ -58,10 +59,8 @@ int main() {
     const int NUMS_SIZE = 500; //2 * pow(10, 4);
     const vector<int> NUMS_ORIGINAL = generateNums(NUMS_SIZE);
 
-    vector<vector<int>> numsPointers;
-
-    // fill up the pointer array with blanks
-    for (int i = 0; i < NUMS_SIZE; i++) numsPointers.push_back(vector<int>(0));
+    vector<int>* numsPointers = new vector<int>[NUMS_SIZE];
+    int* numsPointersConnections = new int[NUMS_SIZE];
 
     // create the node connections
     for (int i = 0; i < NUMS_SIZE; i++) {
@@ -75,6 +74,8 @@ int main() {
             }
         }
     }
+
+    // find the size of the node connections
 
     return 0;
 }
